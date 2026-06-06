@@ -1,0 +1,19 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: vault-issuer
+spec:
+  vault:
+    server: https://10.129.0.39:8200
+    path: pki_int/sign/yandex-infra
+    caBundleSecretRef:
+      name: vault-ca
+      key: ca.crt
+    auth:
+      kubernetes:
+        role: cert-manager-issuer
+        mountPath: /v1/auth/kubernetes
+        secretRef:
+          name: cert-manager-token
+          key: token
+

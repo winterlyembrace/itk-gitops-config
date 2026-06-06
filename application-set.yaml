@@ -16,17 +16,21 @@ spec:
     metadata:
       name: '{{.path.basename}}'
       annotations:
-        argocd.argoproj.io/sync-wave: '{{ .syncWave }}'
+        argocd.argoproj.io/sync-wave: '{{ if hasKey . "syncWave" }}{{ .syncWave }}{{ else }}10{{ end }}'
     spec:
       project: default
       source:
         repoURL: '{{.repoURL}}'
-        chart: '{{.chart}}'
         targetRevision: '{{.targetRevision}}'
+        {{- if contains "github.com" .repoURL }}
+        path: '{{.chart}}'
+        {{- else }}
+        chart: '{{.chart}}'
         helm:
           releaseName: '{{.path.basename}}'
           valueFiles:
             - 'values.yaml'
+        {{- end }}
       destination:
         server: https://kubernetes.default.svc
         namespace: '{{.namespace}}'

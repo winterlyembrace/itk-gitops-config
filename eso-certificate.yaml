@@ -1,0 +1,19 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: vault-server-cert
+  namespace: external-secrets
+spec:
+  secretName: vault-server-tls 
+  duration: 2160h
+  renewBefore: 360h
+  subject:
+    organizations:
+      - ITK
+  ipAddresses:
+    - 127.0.0.1
+    - 10.129.0.39
+  issuerRef:
+    name: my-root-ca-issuer
+    kind: ClusterIssuer
+

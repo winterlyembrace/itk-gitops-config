@@ -1,0 +1,7 @@
+{
+  "chart": "kube-prometheus-stack",
+  "repoURL": "oci://cr.yandex/crpvp4g3i62kr7gb62bo/kube-prometheus-stack",
+  "targetRevision": "86.1.1",
+  "namespace": "monitoring"
+}
+

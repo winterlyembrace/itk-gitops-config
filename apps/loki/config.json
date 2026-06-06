@@ -1,0 +1,6 @@
+{
+  "chart": "loki",
+  "repoURL": "oci://cr.yandex/crpvp4g3i62kr7gb62bo/loki",
+  "targetRevision": "17.1.7",
+  "namespace": "monitoring"
+}

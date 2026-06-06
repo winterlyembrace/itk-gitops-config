@@ -1,0 +1,7 @@
+{
+  "chart": "alloy",
+  "repoURL": "oci://cr.yandex/crpvp4g3i62kr7gb62bo/alloy",
+  "targetRevision": "1.8.2",
+  "namespace": "monitoring"
+}
+

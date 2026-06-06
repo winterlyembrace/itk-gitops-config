@@ -1,0 +1,44 @@
+apiVersion: generators.external-secrets.io/v1alpha1
+kind: ClusterGenerator
+metadata:
+  name: yc-vault-token-generator
+spec:
+  yandex:
+    iam:
+      secretRef:
+        secretStoreRef:
+          name: vault-kubernetes-cluster-store
+          kind: ClusterSecretStore
+        key: infrastructure/yandex
+        property: yc-key
+---
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: yc-registry-oci-auth
+  namespace: argocd
+spec:
+  refreshInterval: "1h"
+  secretStoreRef:
+    name: vault-kubernetes-cluster-store
+    kind: ClusterSecretStore
+  target:
+    name: yc-registry-oci-auth
+    template:
+      metadata:
+        labels:
+          argocd.argoproj.io/secret-type: repository
+      type: Opaque
+      stringData:
+        type: helm
+        enableOCI: "true"
+        url: cr.yandex
+        username: iam
+        password: "{{ .token }}"
+        forceHttpBasicAuth: "true"
+  dataFrom:
+    - generatorRef:
+        apiVersion: generators.external-secrets.io/v1alpha1
+        kind: ClusterGenerator
+        name: yc-vault-token-generator
+

@@ -1,0 +1,8 @@
+{
+  "repoURL": "https://github.com/winterlyembrace/itk-gitops-config",
+  "chart": "apps/eso-config",
+  "targetRevision": "HEAD",
+  "namespace": "external-secrets",
+  "syncWave": "2"
+}
+

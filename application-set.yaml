@@ -4,6 +4,8 @@ metadata:
   name: cluster-apps
   namespace: argocd
 spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
   generators:
     - git:
         repoURL: https://github.com/winterlyembrace/itk-gitops-config
@@ -12,24 +14,27 @@ spec:
           - path: "apps/*/config.json"
   template:
     metadata:
-      name: '{{path.basename}}'
+      name: '{{.path.basename}}'
+      annotations:
+        argocd.argoproj.io/sync-wave: '{{ default "10" .syncWave }}'
     spec:
       project: default
       source:
-        repoURL: '{{repoURL}}'
-        chart: '{{chart}}'
-        targetRevision: '{{targetRevision}}'
+        repoURL: '{{.repoURL}}'
+        chart: '{{.chart}}'
+        targetRevision: '{{.targetRevision}}'
         helm:
-          releaseName: '{{path.basename}}'
+          releaseName: '{{.path.basename}}'
           valueFiles:
-            - '{{path.path}}/values.yaml'
+            - 'values.yaml'
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{namespace}}'
+        namespace: '{{.namespace}}'
       syncPolicy:
         automated:
           prune: true
           selfHeal: true
         syncOptions:
           - CreateNamespace=true
+          - ServerSideApply=true
 

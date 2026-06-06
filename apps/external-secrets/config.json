@@ -3,5 +3,6 @@
   "repoURL": "https://charts.external-secrets.io", 
   "targetRevision": "2.5.0",
   "namespace": "external-secrets"
+  "syncWave": "1"
 }
 

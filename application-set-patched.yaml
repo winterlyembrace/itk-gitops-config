@@ -43,6 +43,6 @@ spec:
           valueFiles:
             - 'values.yaml'
         {{- else }}
-        path: '{{.path}}'
+        path: '{{.path.path}}'
         {{- end }}
 

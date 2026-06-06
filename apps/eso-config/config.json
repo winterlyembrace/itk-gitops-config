@@ -1,6 +1,6 @@
 {
   "type": "raw",
-  "path": "apps/eso-config",
+  "path": "apps/eso-config/manifests",
   "repoURL": "https://github.com/winterlyembrace/itk-gitops-config",
   "targetRevision": "HEAD",
   "namespace": "external-secrets",

@@ -16,7 +16,7 @@ spec:
     metadata:
       name: '{{.path.basename}}'
       annotations:
-        argocd.argoproj.io/sync-wave: '{{ default "10" .syncWave }}'
+        argocd.argoproj.io/sync-wave: '{{ .syncWave }}'
     spec:
       project: default
       source:

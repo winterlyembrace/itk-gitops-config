@@ -44,5 +44,7 @@ spec:
             - 'values.yaml'
         {{- else }}
         path: '{{.path.path}}'
+        directory:
+          exclude: 'config.json'
         {{- end }}
 

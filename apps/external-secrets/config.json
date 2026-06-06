@@ -1,0 +1,7 @@
+{
+  "chart": "external-secrets",
+  "repoURL": "https://charts.external-secrets.io/external-secrets", 
+  "targetRevision": "2.5.0",
+  "namespace": "external-secrets"
+}
+

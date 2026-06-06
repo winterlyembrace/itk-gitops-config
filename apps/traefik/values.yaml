@@ -1,0 +1,59 @@
+imagePullSecrets:
+  - name: private-registry-secret   # Secret containing credentials to pull from your registry
+
+# 2. Deployment & Scaling
+deployment:
+  kind: Deployment
+  replicas: 3                       # High Availability (HA) for production
+  podAntiAffinity:                  # Ensures Traefik pods don't all run on the same node
+    requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+            - key: app.kubernetes.io/name
+              operator: In
+              values:
+                - traefik
+        topologyKey: "kubernetes.io/hostname"
+
+# 3. Cloud Load Balancer Service Setup
+service:
+  enabled: true
+  type: LoadBalancer
+  # Add cloud annotations if your provider requires them (AWS, Azure, GCP, DigitalOcean)
+  annotations: 
+    # Example for AWS NLB:
+    service.beta.kubernetes.io/aws-load-balancer-type: "external"
+    service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: "instance"
+
+# 4. Traefik Entrypoints (Internal Routing Rules)
+ports:
+  web:
+    exposedPort: 80
+    # Production best practice: Force HTTP to redirect to HTTPS globally
+    redirectTo:
+      port: websecure
+      priority: 10
+  
+  websecure:
+    exposedPort: 443
+    tls:
+      enabled: true
+      # Optional: Enforce modern, secure TLS configurations
+      options: "default"
+
+# 5. Production Observability (Metrics & Logs)
+logs:
+  general:
+    level: INFO                     # Change to WARN or ERROR to save disk space if preferred
+    format: json                    # JSON format is easier for Loki / Promtail to parse
+  access:
+    enabled: true                   # Records every single incoming request
+    format: json
+
+# 6. Prometheus Integration (For kube-prometheus-stack)
+metrics:
+  prometheus:
+    entryPoint: metrics
+    addRoutersLabels: true
+    addServicesLabels: true
+

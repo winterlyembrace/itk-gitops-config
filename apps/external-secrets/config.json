@@ -1,4 +1,5 @@
 {
+  "type": "helm",
   "chart": "external-secrets",
   "repoURL": "https://charts.external-secrets.io", 
   "targetRevision": "2.5.0",

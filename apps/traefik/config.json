@@ -1,4 +1,5 @@
 {
+  "type": "helm",
   "chart": "traefik",
   "repoURL": "oci://cr.yandex/crpvp4g3i62kr7gb62bo/traefik", 
   "targetRevision": "40.2.0",

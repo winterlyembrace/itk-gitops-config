@@ -8,7 +8,7 @@ spec:
   goTemplateOptions: ["missingkey=error"]
   generators:
     - git:
-        repoURL: https://github.com/winterlyembrace/itk-gitops-config
+        repoURL: https://github.com
         revision: HEAD
         files:
           - path: "apps/*/config.json"
@@ -22,11 +22,6 @@ spec:
       source:
         repoURL: '{{.repoURL}}'
         targetRevision: '{{.targetRevision}}'
-        chart: '{{.chart}}'
-        helm:
-          releaseName: '{{.path.basename}}'
-          valueFiles:
-            - 'values.yaml'
       destination:
         server: https://kubernetes.default.svc
         namespace: '{{.namespace}}'
@@ -37,4 +32,17 @@ spec:
         syncOptions:
           - CreateNamespace=true
           - ServerSideApply=true
+          
+  templatePatch: |
+    spec:
+      source:
+        {{- if eq .type "helm" }}
+        chart: '{{.chart}}'
+        helm:
+          releaseName: '{{.path.basename}}'
+          valueFiles:
+            - 'values.yaml'
+        {{- else }}
+        path: '{{.path}}'
+        {{- end }}
 

@@ -3,6 +3,6 @@
   "chart": "loki",
   "repoURL": "cr.yandex/crpvp4g3i62kr7gb62bo",
   "targetRevision": "17.1.7",
-  "namespace": "monitoring",
-  "syncWave": "10"
+  "namespace": "loki-space",
+  "syncWave": "5"
 }

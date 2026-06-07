@@ -1,11 +1,7 @@
-imagePullSecrets:
-  - name: private-registry-secret   # Secret containing credentials to pull from your registry
-
-# 2. Deployment & Scaling
 deployment:
   kind: Deployment
-  replicas: 3                       # High Availability (HA) for production
-  podAntiAffinity:                  # Ensures Traefik pods don't all run on the same node
+  replicas: 1  
+  podAntiAffinity:  
     requiredDuringSchedulingIgnoredDuringExecution:
       - labelSelector:
           matchExpressions:
@@ -15,15 +11,9 @@ deployment:
                 - traefik
         topologyKey: "kubernetes.io/hostname"
 
-# 3. Cloud Load Balancer Service Setup
 service:
   enabled: true
   type: LoadBalancer
-  # Add cloud annotations if your provider requires them (AWS, Azure, GCP, DigitalOcean)
-  annotations: 
-    # Example for AWS NLB:
-    service.beta.kubernetes.io/aws-load-balancer-type: "external"
-    service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: "instance"
 
 # 4. Traefik Entrypoints (Internal Routing Rules)
 ports:

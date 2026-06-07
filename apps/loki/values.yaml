@@ -18,11 +18,10 @@ loki:
   ruler:
     enable_api: true
   storage:
-    type: s3
     bucketNames:
       chunks: chunks-bucket
       ruler: ruler-bucket
-      admin: admin-bucket
+    type: s3
 
 minio:
   enabled: true

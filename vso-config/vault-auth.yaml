@@ -20,7 +20,7 @@ spec:
     role: grafana-vso-role
     # ServiceAccount to use when authenticating to Vault
     # it is recommended to always provide a unique serviceAccount per Pod/application
-    serviceAccount: vault-secrets-operator
+    serviceAccount: default
 
   # optional configuration
   # Vault namespace where the auth backend is mounted (requires Vault Enterprise)

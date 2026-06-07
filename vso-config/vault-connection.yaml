@@ -5,7 +5,7 @@ metadata:
   name: vault-connection
   namespace: vault-secrets-operator
 spec:
-  address: https://10.129.0.39:8200
+  address: http://10.129.0.39:8200
 
   # optional configuration
   # HTTP headers to be included in all Vault requests.
@@ -13,7 +13,7 @@ spec:
   # TLS server name to use as the SNI host for TLS connections.
   # tlsServerName: ""
   # skip TLS verification for TLS connections to Vault.
-   skipTLSVerify: false
+  skipTLSVerify: false
   # the trusted PEM encoded CA certificate chain stored in a Kubernetes Secret
   # caCertSecretRef: ""
 

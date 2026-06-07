@@ -7,3 +7,29 @@ defaultVaultConnection:
 serviceAccount:
   create: true
   name: vault-secrets-operator
+
+hooks:
+  # Resources common to all hooks.
+  resources:
+    limits:
+      cpu: 500m
+      memory: 128Mi
+    requests:
+      cpu: 10m
+      memory: 64Mi
+  # Configure the Helm pre-upgrade hook that handles custom resource definition (CRD) upgrades.
+  upgradeCRDs:
+    # Set to true to automatically upgrade the CRDs.
+    # Disabling this will require manual intervention to upgrade the CRDs, so it is recommended to
+    # always leave it enabled.
+    # @type: boolean
+    enabled: true
+
+    # Limit the number of retries for the CRD upgrade.
+    # @type: integer
+    backoffLimit: 5
+
+    # Set the timeout for the CRD upgrade. The operation should typically take less than 5s
+    # to complete.
+    # @type: string
+    executionTimeout: 30s

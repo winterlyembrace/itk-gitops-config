@@ -7,13 +7,12 @@ spec:
     server: https://10.129.0.39:8200
     path: pki_int/sign/yandex-infra
     caBundleSecretRef:
-      name: vault-ca
-      key: ca.crt
+      name: "vault-ca-secret"
+      key: "ca.crt"
     auth:
       kubernetes:
         role: cert-manager-issuer
-        mountPath: /v1/auth/kubernetes
-        secretRef:
-          name: cert-manager-token
-          key: token
-
+        mountPath: "/v1/kubernetes"
+        serviceAccountRef:
+          name: "cert-manager"
+        

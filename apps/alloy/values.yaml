@@ -1,0 +1,20 @@
+alloy:
+  config: |
+    loki.write "loki_receiver" {
+      endpoint {
+        url = "http://kubernetes.cluster.local"
+      }
+    }
+
+    discovery.kubernetes "pods" {
+      role = "pod"
+    }
+
+    loki.source.kubernetes "pod_logs" {
+      targets    = discovery.kubernetes.pods.targets
+      forward_to = [loki.write.loki_receiver.receiver]
+    }
+
+rbac:
+  create: true
+

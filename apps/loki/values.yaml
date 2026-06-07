@@ -1,3 +1,5 @@
+deploymentMode: Monolithic
+
 loki:
   commonConfig:
     replication_factor: 1
@@ -26,8 +28,6 @@ loki:
 minio:
   enabled: true
       
-deploymentMode: Monolithic
-
 singleBinary:
   replicas: 1
 

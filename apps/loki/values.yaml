@@ -18,7 +18,7 @@ loki:
   ruler:
     enable_api: true
   storage:
-    type: filesystem
+    type: s3
     bucketNames:
       chunks: chunks-bucket
       ruler: ruler-bucket

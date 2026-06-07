@@ -1,0 +1,8 @@
+{
+  "type": "helm",
+  "chart": "vault-secrets-operator",
+  "repoURL": "cr.yandex/crpvp4g3i62kr7gb62bo", 
+  "targetRevision": "1.4.0",
+  "namespace": "vault-secrets-operator",
+  "syncWave": "1"
+}

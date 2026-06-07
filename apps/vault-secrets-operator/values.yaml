@@ -1,0 +1,9 @@
+defaultVaultConnection:
+  enabled: true
+  address: "https://10.129.0.39:8200" 
+  # tlsServerName: "vault.local"
+   skipTLSVerify: true
+
+serviceAccount:
+  create: true
+  name: vault-secrets-operator

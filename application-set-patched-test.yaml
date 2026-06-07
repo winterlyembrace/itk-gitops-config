@@ -41,7 +41,7 @@ spec:
         helm:
           releaseName: '{{.path.basename}}'
           valueFiles:
-            - $customvalues/apps/*/values.yaml
+            - $customvalues/apps/{{.path.basename}}/values.yaml
       - repoURL: 'https://github.com/winterlyembrace/itk-gitops-config.git'
         ref: customvalues
         {{- else }}

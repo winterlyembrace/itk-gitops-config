@@ -15,23 +15,13 @@ service:
   enabled: true
   type: LoadBalancer
 
-# 4. Traefik Entrypoints (Internal Routing Rules)
 ports:
   web:
     exposedPort: 80
-    # Production best practice: Force HTTP to redirect to HTTPS globally
-    redirectTo:
-      port: websecure
-      priority: 10
   
   websecure:
     exposedPort: 443
-    tls:
-      enabled: true
-      # Optional: Enforce modern, secure TLS configurations
-      options: "default"
 
-# 5. Production Observability (Metrics & Logs)
 logs:
   general:
     level: INFO                     # Change to WARN or ERROR to save disk space if preferred
@@ -40,7 +30,6 @@ logs:
     enabled: true                   # Records every single incoming request
     format: json
 
-# 6. Prometheus Integration (For kube-prometheus-stack)
 metrics:
   prometheus:
     entryPoint: metrics
